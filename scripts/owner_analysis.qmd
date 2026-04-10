@@ -1,0 +1,41 @@
+---
+title: "Lobster"
+author: "Jessie"
+format: html
+---
+
+## Exercise: Explore, Clean, and Wrangle Data
+
+
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+```
+
+
+```{r}
+lobster_abundance <- readr::read_csv(here::here("data", "Lobster_Abundance_All_Years_20240411.csv")) %>%
+    janitor::clean_names()
+```
+
+
+```{r}
+unique(lobster_abundance$size_mm)
+lobster_abundance_v2 <- lobster_abundance %>% 
+    mutate(size_mm = na_if(size_mm, -99999.0))
+head(lobster_abundance_v2)
+```
+
+
+```{r}
+lobster_nonapl <- lobster_abundance_v2 %>% 
+    filter(site != "NAPL")
+unique(lobster_nonapl$site)
+```
+
+
+```{r}
+
+```
